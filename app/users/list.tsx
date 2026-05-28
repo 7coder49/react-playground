@@ -21,23 +21,14 @@ export default function UserList() {
 
     const filterUsers = debounce((text: string)=>{
         
-        const filterData = users.filter((u)=>{
-            if(
-                Object.keys(u).some((k)=>{
-                    if(String(u[k]).toLowerCase().includes(text)){
-                        return true;
-                    }
-                    return false;
-                }
-               
-                )
-            ){
-                return true;
-            }
-            return false;
-        })
+        const filterData = users.filter((u)=>
+            Object.values(u).some((v)=>
+                String(v).toLowerCase().includes(text)
+            )
+        )
+
         setFilteredUsers(filterData);
-    }, 300)
+    }, 900)
 
     useEffect(()=>{
         if(users.length === 0) return;

@@ -16,7 +16,7 @@ export default function UserCreation() {
             body: JSON.stringify(e),
         })
         const userRes = await user.json();
-        if(userRes.status === true){
+        if(userRes.success === true){
             toast.success(userRes.message);
             reset();
         }else{
