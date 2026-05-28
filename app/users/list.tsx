@@ -9,7 +9,7 @@ export default function UserList() {
         fetch('http://localhost:3000/getAllUsers')
             .then(async(res)=>{
                 const userList = await res.json();
-                setUsers(userList)
+                setUsers(userList.data)
             })
     }
 
@@ -22,6 +22,7 @@ export default function UserList() {
             <div className="w-full">
                 <SearchBox searchText={searchText} setSearchText={setSearchText}/>
             </div>
+            { users?.length > 0 &&
             <Table className="border">
                 <TableHeader>
                     <TableRow>
@@ -32,18 +33,19 @@ export default function UserList() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                     { users &&
-                    users.map((user: any)=>(
+                    {
+                        users.map((user: any)=>(
                            <TableRow key={user.id}>
                              <TableCell className="border">{user.id}</TableCell>
                             <TableCell className="border">{user.name}</TableCell>
                             <TableCell className="border">{user.age}</TableCell>
                             <TableCell className="border">{user.dept}</TableCell>
                            </TableRow>
-                    ))
+                        ))
                     }
                 </TableBody>
             </Table>
+        }
         </div>
     )
 }
