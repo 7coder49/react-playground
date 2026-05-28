@@ -3,6 +3,7 @@
 import { Dispatch, memo, SetStateAction, useEffect, useState } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { debounce } from "next/dist/server/utils";
+import api from "../services/api";
 
 export default function UserList() {
     const [users, setUsers] = useState<any>([]);
@@ -10,12 +11,10 @@ export default function UserList() {
     const [filteredUsers, setFilteredUsers] = useState<any>([]);
 
     const getUserList = () => {
-        fetch('http://localhost:3000/getAllUsers')
+        api.get('/getAllUsers')
             .then(async(res)=>{
-                const userList = await res.json();
-                
-                setUsers(userList.data)
-                setFilteredUsers(userList.data)
+                setUsers(res.data.data)
+                setFilteredUsers(res.data.data)
             })
     }
 

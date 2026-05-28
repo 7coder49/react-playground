@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import api from "../services/api";
 
 export default function UserCreation() {
     const {
@@ -8,16 +9,9 @@ export default function UserCreation() {
         reset
     } = useForm();
     const handleSave = async (e: any) => {
-        const user = await fetch('http://localhost:3000/createUser',{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(e),
-        })
-        const userRes = await user.json();
-        if(userRes.success === true){
-            toast.success(userRes.message);
+        const user = await api.post('/createUser', e)
+        if(user.data.success === true){
+            toast.success(user.data.message);
             reset();
         }else{
             toast.error('Please fill the valid data');
