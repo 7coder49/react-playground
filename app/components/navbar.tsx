@@ -17,7 +17,7 @@ export default function NavBar(){
         
     }, [activeNav])
     return(
-        <div className="flex gap-20 h-12 w-full bg-purple-400 px-20 items-center">
+        <div className="flex gap-20 h-12 w-full bg-gray-400 px-20 items-center">
             <button
                 className={`h-8 px-2 cus-pointer rounded-sm ${activeNav === '/' ? 'border border-blue-900 bg-blue-500': ''}`}
                 onClick={()=>changeNav('/')}
